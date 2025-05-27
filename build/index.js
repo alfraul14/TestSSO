@@ -6,12 +6,12 @@ app.get('/', (_req, res) => {
     res.send('API REST desplegada en Render.com!!');
 });
 app.post('/decode', (req, res) => {
-    const { b64 } = req.body;
-    if (!b64 || typeof b64 !== 'string') {
+    const { tokenDocument } = req.body;
+    if (!tokenDocument || typeof tokenDocument !== 'string') {
         return res.status(400).json({ error: 'Falta el campo "b64" o no es una cadena' });
     }
     try {
-        const decoded = Buffer.from(b64, 'base64').toString('utf-8');
+        const decoded = Buffer.from(tokenDocument, 'base64').toString('utf-8');
         return res.json({ decoded });
     }
     catch (_a) {

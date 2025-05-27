@@ -13,14 +13,14 @@ app.get('/', (_req: any, res: any) => {
 })
 
 app.post('/decode', (req: any, res: any) => {
-  const { b64 } = req.body
+  const { tokenDocument } = req.body
   
-  if (!b64 || typeof b64 !== 'string') {
+  if (!tokenDocument || typeof tokenDocument !== 'string') {
     return res.status(400).json({ error: 'Falta el campo "b64" o no es una cadena' })
   }
 
   try {
-    const decoded = Buffer.from(b64, 'base64').toString('utf-8')
+    const decoded = Buffer.from(tokenDocument, 'base64').toString('utf-8')
     return res.json({ decoded })
   } catch {
     return res.status(400).json({ error: 'Base64 inválido' })
